@@ -1,0 +1,16 @@
+make.exe --dry-run --keep-going --print-directory
+make.exe: Entering directory `c:/dev/project/stm32_tiny_monitor-master'
+echo "[Compiling] src/main.c src/st7789_stm32_spi.c libopencm3/lib/cm3/vector.c src/usb_descriptor.c src/common.c"
+C:/dev/10 2020-q4-major/bin/bin/arm-none-eabi-gcc -I. -Ilibopencm3/include -Iinc -Ifonts -DSTM32F1 -ggdb -Wall -Wextra -Warray-bounds -mlittle-endian -mthumb -mthumb-interwork -mfloat-abi=soft --specs=nano.specs -mcpu=cortex-m3 -O0 -ffunction-sections -fdata-sections -Tstm32f103xb.ld --specs=nosys.specs -Wl,--gc-sections -static -Wl,--Map=main.map -Wl,--cref --static -nostartfiles  src/main.c src/st7789_stm32_spi.c libopencm3/lib/cm3/vector.c src/usb_descriptor.c src/common.c -Llibopencm3/lib -lopencm3_stm32f1 -o main.elf
+ 
+echo "[Building] main.bin"
+C:/dev/10 2020-q4-major/bin/bin/arm-none-eabi-objcopy -O binary main.elf main.bin
+echo "[Building] main.hex"
+C:/dev/10 2020-q4-major/bin/bin/arm-none-eabi-objcopy -O ihex main.elf main.hex
+echo "[Building] main.lst"
+C:/dev/10 2020-q4-major/bin/bin/arm-none-eabi-objdump -S main.elf > main.lst
+ 
+size -B -d main.elf
+ 
+make.exe: Leaving directory `c:/dev/project/stm32_tiny_monitor-master'
+ 
